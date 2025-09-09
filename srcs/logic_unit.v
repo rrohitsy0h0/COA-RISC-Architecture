@@ -4,8 +4,8 @@
 `timescale 1ns / 1ps
 
 module logic_unit(
-    input  [31:0] x, y,
-    input  [1:0]  logicfn,
+    input [31:0] x, y,
+    input [1:0] logicfn,
     output reg [31:0] l_output 
 );
     always @(*) begin

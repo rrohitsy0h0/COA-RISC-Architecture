@@ -5,8 +5,8 @@
 
 module fulladderN(
     input  [31:0] a,b,
-    input         cin,
-    output        cout,
+    input  cin,
+    output cout,
     output [31:0] sum
 );
     wire [31:0] carry;
