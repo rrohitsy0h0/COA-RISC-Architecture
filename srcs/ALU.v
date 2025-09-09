@@ -38,8 +38,9 @@ module ALU (
         .l_output(L)
     );
 
-    assign LUI16 = {y[15:0],16'b0};
-    assign sl = (S_Flag==1'b0) ? 32'b0 : 32'b1;
+    assign LUI16 = {y[15:0],16'b0}; // Pad 16 0's to the immediate portion
+
+    assign sl = (S_Flag==1'b1) ? 32'b1 : 32'b0; // assigning 1 for x < y else 0
 
     Fn_mux M(
         .LUI16(LUI16),
