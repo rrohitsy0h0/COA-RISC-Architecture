@@ -4,48 +4,46 @@
 `timescale 1ns / 1ps
 
 module ALU (
-    input [31:0] x,
-    input [31:0] y,
-    input add_sub,
-    input [1:0] LogicFn,
-    input [1:0] FnClass,
+    input  [31:0] x,
+    input  [31:0] y,
+    input         add_sub,
+    input  [1:0]  LogicFn,
+    input  [1:0]  FnClass,
     output [31:0] ALU_result,
-    output Overflow
+    output        Overflow
 );
-
-    wire C_Flag,Z_Flag,S_Flag,V_Flag;
     wire [31:0] F;
     wire [31:0] L;
     wire [31:0] LUI16;
     wire [31:0] sl;
+    wire [31:0] y_input;
+    wire        carry_out_31;
 
-    assign y_input = (add_sub==1'b1) ? ~y : y; //XOR of y and add_sum
+    assign y_input = add_sub ? ~y : y; //1'
 
-    Arithmetic A( // Arithmetic Unit
+    Arithmetic A_unit (
         .x(x),
         .y_input(y_input),
         .add_sub(add_sub),
         .A_out(F),
-        .cout(C_Flag)
+        .cout(carry_out_31)
     );
 
-    assign Z_Flag = ~|F;
-    assign S_Flag = F[31];
-    assign V_Flag = C_Flag ^ S_Flag;
-    assign Overflow = V_Flag;
-
-    logic L( // Logical Unit
+    logic_unit L_unit (
         .x(x),
         .y(y),
         .logicfn(LogicFn),
         .l_output(L)
     );
 
-    assign LUI16 = {y[15:0],16'b0}; // Pad 16 0's to the immediate portion
+    wire S_Flag = F[31];
+    wire V_Flag = (x[31] == y_input[31]) && (S_Flag != x[31]);
+    assign Overflow = V_Flag;
 
-    assign sl = (S_Flag==1'b1) ? 32'b1 : 32'b0; // assigning 1 for x < y else 0
+    assign LUI16 = {y[15:0], 16'b0};
+    assign sl = {31'b0, S_Flag};
 
-    Fn_mux M(
+    Fn_mux M_unit (
         .LUI16(LUI16),
         .sl(sl),
         .A_out(F),
