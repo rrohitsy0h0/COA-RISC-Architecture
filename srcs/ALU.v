@@ -8,10 +8,10 @@ module ALU (
     input [1:0] fn,
     output [31:0] ALU_result,
     output Overflow,
-    output Zero,
-    output Sign
 );
 
+    wire C_Flag,Z_Flag,S_Flag,V_Flag;
+    wire [31:0] F;
     Arithmetic A(
         .x(x),
         .y_input(y_input),
@@ -19,7 +19,9 @@ module ALU (
         .A_out($$),
         .cout());
 
-    Logical L();
+    logic L(
+        .x(x),.y(y),.logicfn(LogicFn),.l_output(F)
+    );
 
     Mux M();
     
