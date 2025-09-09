@@ -1,3 +1,8 @@
+// Dharnesh Bala 23CS10008
+// Rohit Ranjeet Satpute 23CS10060
+
+`timescale 1ns / 1ps
+
 module Fn_mux(
     input [31:0] LUI16,
     input [31:0] sl,

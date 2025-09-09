@@ -1,4 +1,7 @@
-`timescale 1ns/1ps
+// Dharnesh Bala 23CS10008
+// Rohit Ranjeet Satpute 23CS10060
+
+`timescale 1ns / 1ps
 
 module ALU (
     input [31:0] x,
