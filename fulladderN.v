@@ -1,21 +1,15 @@
 `timescale 1ns / 1ps
 
-module fulladderN(
-    input [31:0]a,b,
-    input cin,
-    output cout,
-    output [31:0] sum
+module fulladder1(
+    input a,b,cin,
+    output cout,sum
 );
 
-wire [31:0] carry;
-fulladder1(.a(a[0]),.b(b[0]),.cin(1'b0),.sum(sum[0]),.cout(carry[0]));
-
-genvar i;
-generate
-    for(i=1;i<32;i=i+1) begin: addmodule
-        fulladder1(.a(a[i]),.b(b[i]),.cin(carry[i-1]),.sum(sum[i]),.cout(carry[i]));
-    end
-endgenerate
-    assign cout=carry[31];
+wire w1,w2,w3;
+xor(w1,a,b);
+xor(sum,w1,cin);
+and(w2,a,b);
+and(w3,w1,cin);
+or(cout,w2,w3);
 
 endmodule
