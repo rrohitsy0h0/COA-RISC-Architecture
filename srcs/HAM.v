@@ -1,3 +1,8 @@
+// Dharnesh Bala 23CS10008
+// Rohit Ranjeet Satpute 23CS10060
+
+`timescale 1ns / 1ps
+
 module HAM_unit (
     input [31:0] x,
     output [31:0] HAM_out
