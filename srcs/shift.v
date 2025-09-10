@@ -14,7 +14,7 @@ module shift_unit (
     reg [31:0] shift_value;
     
     always @(*) begin
-        shift_value = ConstVar ? y : {31'b0000, y[0]};
+        shift_value = ~ConstVar ? y : {31'b0000, y[0]};
     end
 
     always @(*) begin

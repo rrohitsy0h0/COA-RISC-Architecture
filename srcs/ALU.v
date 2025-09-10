@@ -29,7 +29,7 @@ module ALU (
         .y_input(y_input),
         .add_sub(add_sub),
         .A_out(F),
-        .cout(C_Flag)
+        .cout(C_Flag),
         .Overflow(Overflow)
     );
 
