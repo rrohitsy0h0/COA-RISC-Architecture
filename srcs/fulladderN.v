@@ -7,7 +7,8 @@ module fulladderN(
     input  [31:0] a,b,
     input  cin,
     output cout,
-    output [31:0] sum
+    output [31:0] sum,
+    output Overflow
 );
     wire [31:0] carry;
 
@@ -20,5 +21,6 @@ module fulladderN(
         end
     endgenerate
     
-    assign cout=carry[31];
+    assign cout = carry[31];
+    assign Overflow = carry[31] ^ carry[30];
 endmodule

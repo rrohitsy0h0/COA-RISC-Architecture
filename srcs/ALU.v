@@ -30,6 +30,7 @@ module ALU (
         .add_sub(add_sub),
         .A_out(F),
         .cout(C_Flag)
+        .Overflow(Overflow)
     );
 
     logic_unit L_unit (
@@ -41,9 +42,9 @@ module ALU (
 
     wire Z_Flag = ~|F;
     wire S_Flag = F[31];
-    wire V_Flag = C_Flag ^ S_Flag;
+    // wire V_Flag = C_Flag ^ S_Flag;
     
-    assign Overflow = V_Flag;
+    // assign Overflow = V_Flag;
 
     assign LUI16 = {y[15:0], 16'b0};
     assign slt = {31'b0, S_Flag};

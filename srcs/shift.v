@@ -11,10 +11,10 @@ module shift_unit (
     output reg [31:0] Shift_out
 );
 
-    reg [4:0] shift_value;
+    reg [31:0] shift_value;
     
     always @(*) begin
-        shift_value = ConstVar ? y[4:0] : {4'b0000, y[0]};
+        shift_value = ConstVar ? y : {31'b0000, y[0]};
     end
 
     always @(*) begin
