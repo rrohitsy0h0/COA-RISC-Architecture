@@ -10,11 +10,11 @@ This project implements a Reduced Instruction Set Computer (RISC) processor arch
 
 ---
 
-
 ## Authors
 
-- **Dharnesh Bala** (23CS10008)
-- **Rohit Ranjeet Satpute** (23CS10060)
+- [**Dharnesh Bala**](https://github.com/BerserkWInter) (23CS10008)
+- [**Rohit Ranjeet Satpute**](https://github.com/rrohitsy0h0) (23CS10060)
+
 
 ---
 
