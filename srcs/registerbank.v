@@ -41,7 +41,7 @@ module registerbank(
             rsOut=32'b0;
         end else if (wrReg && (rd==rs) && (rd!=5'd0)) begin
             rsOut=rdIn; //forward write
-            regs[rs] <= rdIn; //??
+            // regs[rs] <= rdIn; //??
         end else begin
             rsOut=regs[rs];
         end
@@ -53,7 +53,7 @@ module registerbank(
             rtOut=32'b0;
         end else if (wrReg && (rd==rt) && (rd!=5'd0)) begin
             rtOut=rdIn;  //forward write
-            regs[rt] <= rdIn; //??
+            // regs[rt] <= rdIn; //??
         end else begin
             rtOut=regs[rt];
         end
