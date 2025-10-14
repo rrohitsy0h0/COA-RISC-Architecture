@@ -85,5 +85,8 @@ always @(*) begin
         end
         endcase
 end
+assign display_output=(DFT_Display_Select) ? rdIn[31:16] : rdIn[15:0];
+
+
 
 endmodule
