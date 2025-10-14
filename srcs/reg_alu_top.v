@@ -38,8 +38,7 @@ registerbank reg_bank(
 
 reg add_sub,ConstVar;
 reg [1:0] LogicFn,ShiftFn;
-ref [2:0] FnClass;
-
+reg [2:0] FnClass;
 
 wire [31:0] rsOut;
 wire [31:0] rtOut;
@@ -86,7 +85,5 @@ always @(*) begin
         endcase
 end
 assign display_output=(DFT_Display_Select) ? rdIn[31:16] : rdIn[15:0];
-
-
 
 endmodule
