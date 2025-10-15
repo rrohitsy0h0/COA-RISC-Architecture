@@ -240,9 +240,9 @@ module ALU_regbank_tb();
     end
     
     // Waveform dump (for viewing in GTKWave or similar)
-    initial begin
-        $dumpfile("reg_alu_top_tb.vcd");
-        $dumpvars(0, tb_reg_alu_top);
-    end
+//    initial begin
+//        $dumpfile("reg_alu_top_tb.vcd");
+//        $dumpvars(0, tb_reg_alu_top);
+//    end
 
 endmodule

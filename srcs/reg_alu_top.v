@@ -12,7 +12,7 @@ module reg_alu_top(
     input execute,
     input clk,
     input rst,
-    output reg [15:0] display_output
+    output wire [15:0] display_output
     );
 
 reg add_sub,ConstVar;
