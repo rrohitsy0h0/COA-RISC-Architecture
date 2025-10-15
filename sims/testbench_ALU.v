@@ -1,7 +1,9 @@
+// Dharnesh Bala 23CS10008
+// Rohit Ranjeet Satpute 23CS10060
+
 `timescale 1ns/1ps
 
 module testbench_ALU;
-    /* ───────── registers that drive the DUT ───────── */
     reg  [31:0] x, y;
     reg         add_sub;
     reg         ConstVar;
@@ -9,18 +11,15 @@ module testbench_ALU;
     reg  [1:0]  ShiftFn;
     reg  [2:0]  FnClass;
 
-    /* ───────── wires that observe the DUT ─────────── */
     wire [31:0] ALU_result;
     wire        Overflow;
 
-    /* ───────── test tracking variables ─────────────── */
     integer test_count = 0;
     integer pass_count = 0;
     integer fail_count = 0;
     reg [31:0] expected_result;
     reg expected_overflow;
 
-    /* ───────── DUT instantiation ──────────────────── */
     ALU uut (
         .x        (x),
         .y        (y),
@@ -33,7 +32,6 @@ module testbench_ALU;
         .Overflow   (Overflow)
     );
 
-    /* ───────── pretty-print current opcode ─────────── */
     reg [8*8-1:0] op_name;
     always @(*) begin
         case (FnClass)
@@ -63,7 +61,6 @@ module testbench_ALU;
         endcase
     end
 
-    /* ───────── test checking task ───────────────────── */
     task check_result(
         input [31:0] expected_res,
         input expected_ov,
@@ -85,7 +82,6 @@ module testbench_ALU;
         end
     endtask
 
-    /* ───────── comprehensive test suite ─────────────── */
     initial begin
         $dumpfile("alu.vcd");
         $dumpvars(0, testbench_ALU);
