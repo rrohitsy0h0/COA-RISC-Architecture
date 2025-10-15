@@ -12,6 +12,15 @@ module reg_alu_top(
     output reg [15:0] display_output
     );
 
+reg add_sub,ConstVar;
+reg [1:0] LogicFn,ShiftFn;
+reg [2:0] FnClass;
+
+wire [31:0] rsOut;
+wire [31:0] rtOut;
+wire [31:0] rdIn;
+wire [31:0] rdOut;  
+  
 ALU alu_init(
     .x(rsOut),
     .y(rtOut),
@@ -27,55 +36,51 @@ ALU alu_init(
 registerbank reg_bank(
     .clk(clk),
     .rst(rst),
-    .rs({0,Rs}),
-    .rt({0,Rt}),
-    .rd({0,Rd}),
+  .rs({1'b0,Rs}),
+  .rt({1'b0,Rt}),
+  .rd({1'b0,Rd}),
     .wEnable(execute),
     .rdIn(rdIn),
     .rsOut(rsOut),
-    .rtOut(rtOut)
+    .rtOut(rtOut),
+    .rdOut(rdOut)
 );
-
-reg add_sub,ConstVar;
-reg [1:0] LogicFn,ShiftFn;
-reg [2:0] FnClass;
-
-wire [31:0] rsOut;
-wire [31:0] rtOut;
-wire [31:0] rdIn;
     
 always @(*) begin
     
-    	case(ALU_operation)
-		3'000: begin //add
+  		case(ALU_Operation)
+		3'b000: begin //add
             add_sub=1'b0;
             FnClass=3'b011;
 		end
-		3'001: begin //sub
+		3'b001: begin //sub
             add_sub=1'b1;
             FnClass=3'b011;
 		end
-		3'010: begin //and
+		3'b010: begin //and
             LogicFn=2'b00;
             FnClass=3'b100;
 		end
-        3'011: begin //or
+        3'b011: begin //or
             LogicFn=2'b01;
             FnClass=3'b100;
 		end
-		3'100: begin //xor
+		3'b100: begin //xor
             LogicFn=2'b10;
             FnClass=3'b100;
 		end
-		3'101: begin //sll
+		3'b101: begin //sll
+          	ConstVar=1'b1;
             ShiftFn=2'b00;
             FnClass=3'b101;
 		end
-        3'110: begin //srl
+        3'b110: begin //srl
+          	ConstVar=1'b1;
             ShiftFn=2'b01;
             FnClass=3'b101;
 		end
-		3'111: begin //sra
+		3'b111: begin //sra
+          	ConstVar=1'b1;
             ShiftFn=2'b10;
             FnClass=3'b101;
 		end
@@ -84,6 +89,6 @@ always @(*) begin
         end
         endcase
 end
-assign display_output=(DFT_Display_Select) ? rdIn[31:16] : rdIn[15:0];
+assign display_output=(DFT_Display_Select) ? rdOut[31:16] : rdOut[15:0];
 
 endmodule

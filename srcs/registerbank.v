@@ -8,28 +8,25 @@ module registerbank(
     input [4:0] rd,
     input wEnable,  
     input [31:0] rdIn,
-    output reg [31:0] rsOut,
-    output reg [31:0] rtOut    
+    output [31:0] rsOut,
+    output [31:0] rtOut,
+    output [31:0] rdOut    
 );
-    
     integer i;
     reg [31:0] regfile [0:31];
+
+    assign rsOut = regfile[rs];
+    assign rtOut = regfile[rt];
+    assign rdOut = regfile[rd];
     
-    // FIXED: Asynchronous reset with proper sensitivity list
     always @(posedge clk or posedge rst) begin
         if(rst) begin
             for (i = 0; i < 32; i = i + 1) begin
-                regfile[i] <= i;  // Initialize register[i] = i
+                regfile[i] <= i;
             end
         end else if (wEnable) begin
             regfile[rd] <= rdIn;        
         end
     end
-    
-    // Combinational read logic
-    always @(*) begin
-        rsOut = regfile[rs];
-        rtOut = regfile[rt];
-    end 
     
 endmodule
